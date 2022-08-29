@@ -32,3 +32,15 @@ function operate(operator, a, b) {
             console.log('No appropriate operator');
     }
 }
+
+let displayValue;
+const calcDisplay = document.querySelector('#calcDisplay');
+
+const numberButtons = document.querySelectorAll('.numberBtn');
+
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        calcDisplay.value = calcDisplay.value + button.textContent;
+        displayValue = calcDisplay.valueAsNumber;
+    });
+});
