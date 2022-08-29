@@ -22,7 +22,7 @@ function operate(operator, a, b) {
         case '-':
             return subtract(a, b);
             break;
-        case '*':
+        case 'x':
             return multiply(a, b);
             break;
         case '/':
@@ -34,20 +34,52 @@ function operate(operator, a, b) {
 }
 
 let displayValue;
+let currentOperator = "";
+let firstOperand;
+let secondOperand;
+let nextClick = false;
+
 const calcDisplay = document.querySelector('#calcDisplay');
 
 const numberButtons = document.querySelectorAll('.numberBtn');
+const operatorButtons = document.querySelectorAll('.operatorBtn');
+const equalButton = document.querySelector('.equalBtn');
 const clearButton = document.querySelector('.clearBtn');
 
 // Populates calculator's display when number button is clicked
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        if (nextClick === true) {
+            nextClick = false;
+            calcDisplay.value = "";
+        }
         calcDisplay.value = calcDisplay.value + button.textContent;
         displayValue = calcDisplay.valueAsNumber;
     });
 });
 
+// Sets up operation to be performed
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        firstOperand = displayValue;
+        currentOperator = button.textContent;
+        nextClick = true;
+    });
+});
+
+equalButton.addEventListener('click', () => {
+    secondOperand = displayValue;
+    displayValue = operate(currentOperator, firstOperand, secondOperand);
+    calcDisplay.value = displayValue;
+    firstOperand = displayValue;
+    nextClick = true;
+})
+
 // Clears calculator display and resets value
 clearButton.addEventListener('click', () => {
     calcDisplay.value = "";
+    currentOperator = "";
+    firstOperand = undefined;
+    secondOperand = undefined;
+    nextClick = false;
 });
