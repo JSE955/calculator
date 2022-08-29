@@ -37,10 +37,17 @@ let displayValue;
 const calcDisplay = document.querySelector('#calcDisplay');
 
 const numberButtons = document.querySelectorAll('.numberBtn');
+const clearButton = document.querySelector('.clearBtn');
 
+// Populates calculator's display when number button is clicked
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
         calcDisplay.value = calcDisplay.value + button.textContent;
         displayValue = calcDisplay.valueAsNumber;
     });
+});
+
+// Clears calculator display and resets value
+clearButton.addEventListener('click', () => {
+    calcDisplay.value = "";
 });
