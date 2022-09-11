@@ -36,7 +36,6 @@ function operate(operator, a, b) {
 let displayValue;
 let currentOperator = "";
 let firstOperand;
-let secondOperand;
 let nextClick = false;
 
 const calcDisplay = document.querySelector('#calcDisplay');
@@ -61,6 +60,10 @@ numberButtons.forEach((button) => {
 // Sets up operation to be performed
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        if (currentOperator != "") {
+            displayValue = operate(currentOperator, firstOperand, displayValue);
+            calcDisplay.value = displayValue;
+        }
         firstOperand = displayValue;
         currentOperator = button.textContent;
         nextClick = true;
@@ -68,11 +71,11 @@ operatorButtons.forEach((button) => {
 });
 
 equalButton.addEventListener('click', () => {
-    secondOperand = displayValue;
-    displayValue = operate(currentOperator, firstOperand, secondOperand);
+    displayValue = operate(currentOperator, firstOperand, displayValue);
     calcDisplay.value = displayValue;
     firstOperand = displayValue;
     nextClick = true;
+    currentOperator = "";
 })
 
 // Clears calculator display and resets value
@@ -80,6 +83,6 @@ clearButton.addEventListener('click', () => {
     calcDisplay.value = "";
     currentOperator = "";
     firstOperand = undefined;
-    secondOperand = undefined;
+    displayValue = undefined;
     nextClick = false;
 });
