@@ -71,12 +71,16 @@ operatorButtons.forEach((button) => {
 });
 
 equalButton.addEventListener('click', () => {
-    displayValue = operate(currentOperator, firstOperand, displayValue);
-    calcDisplay.value = displayValue;
-    firstOperand = displayValue;
-    nextClick = true;
-    currentOperator = "";
-})
+    if (nextClick === true || currentOperator === "") {
+        return;
+    } else {
+        displayValue = operate(currentOperator, firstOperand, displayValue);
+        calcDisplay.value = displayValue;
+        firstOperand = displayValue;
+        nextClick = true;
+        currentOperator = "";
+    }
+});
 
 // Clears calculator display and resets value
 clearButton.addEventListener('click', () => {
