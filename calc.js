@@ -26,7 +26,11 @@ function operate(operator, a, b) {
             return multiply(a, b);
             break;
         case '/':
-            return divide(a, b);
+            if (b === 0) {
+                alert("You cannot divide by zero! Try again");
+            } else {
+                return divide(a, b);
+            }
             break;
         default:
             console.log('No appropriate operator');
