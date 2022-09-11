@@ -1,3 +1,4 @@
+// Functions for basic math operations
 function add(a, b) {
     return a + b;
 }
@@ -12,8 +13,9 @@ function multiply(a, b) {
 
 function divide(a, b) {
     return a / b;
-}
+};
 
+// Takes an operator and 2 numbers and calls one of the above functions
 function operate(operator, a, b) {
     switch (operator) {
         case '+':
@@ -35,15 +37,18 @@ function operate(operator, a, b) {
         default:
             console.log('No appropriate operator');
     }
-}
+};
 
+// Variables used for calculation
 let displayValue;
 let currentOperator = "";
 let firstOperand;
+
+// Determines if next number clicked should begin new value
 let nextClick = false;
 
+// DOM objects to be manipulated
 const calcDisplay = document.querySelector('#calcDisplay');
-
 const numberButtons = document.querySelectorAll('.numberBtn');
 const operatorButtons = document.querySelectorAll('.operatorBtn');
 const equalButton = document.querySelector('.equalBtn');
@@ -74,6 +79,7 @@ operatorButtons.forEach((button) => {
     });
 });
 
+// Evaluates expression
 equalButton.addEventListener('click', () => {
     if (nextClick === true || currentOperator === "") {
         return;
